@@ -22,7 +22,7 @@ function Circle(x,y,dx,dy,radius){
         if(this.x+this.radius>canvas.width || this.x-this.radius<0){
             this.dx=-this.dx
         }
-        if(this.y+this.radius>canvas.height || this.y-this.radius<0){
+        if(this.y-this.radius<0 ||this.y+this.radius>canvas.height){
             this.dy=-this.dy
         }
         this.x+=this.dx
@@ -30,7 +30,7 @@ function Circle(x,y,dx,dy,radius){
 
 
         //mouse+circle position
-        if(mouse.x-this.x<30 && mouse.x-this.x>-30 && mouse.y-this.y<30 && mouse.y-this.y>-30){
+        if(mouse.x-this.x<30 && mouse.x-this.x>-30 && mouse.y-this.y<30 && mouse.y-this.y>-30){ 
             if(this.radius<10)
                 this.radius+=1            
         }
@@ -46,10 +46,10 @@ function Circle(x,y,dx,dy,radius){
 function init(){
     circleArr=[]   
     console.log("init method called");
-    for(i=0;i<2000;i++){
+    for(i=0;i<1000;i++){
         radius=Math.random()*3+1
-        x=Math.random()*(innerWidth - radius*2)+radius
-        y=Math.random()*(innerHeight  - radius*2)+radius
+        x = Math.random()*(innerWidth - radius*2)+radius
+        y = Math.random()*(innerHeight  - radius*2)+radius
         dx = Math.random()-0.5*4
         dy = Math.random()-0.5*4
         circleArr.push(new Circle(x,y,dx,dy,radius))
@@ -90,10 +90,10 @@ window.addEventListener('resize',function(){
     init()
 })
 
-
-init()
-canvasArc()
-
+for(x=0;x<10;x++){
+    init()
+    canvasArc()
+}
 
 
 
